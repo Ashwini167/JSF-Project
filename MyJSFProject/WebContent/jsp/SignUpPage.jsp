@@ -17,11 +17,21 @@
 	<h:outputText id="bigTitle1" value="Sign Up!"></h:outputText>
 </div>
 <div class="signUpContainer">
-		<h:outputText styleClass="elementsHeader" id="nameIn" value="Name"></h:outputText>
-		<h:inputText styleClass="inputTextBox" id="name" value="#{signUpBean.name}" required="true" maxlength="30" size="35"></h:inputText>
+		
+		<h:outputText styleClass="elementsHeader" id="userTypeIn" value="Signup As:"></h:outputText>
+		<h:selectOneMenu id="userType" value="#{signUpBean.userType}" required="true" requiredMessage="Please choose if you are logging in as customer or supplier">
+			<f:selectItem itemValue="N" itemLabel="Select.." noSelectionOption="true"/>
+			<f:selectItem itemValue="S" itemLabel="Supplier" />
+			<f:selectItem itemValue="C" itemLabel="Customer" />
+		</h:selectOneMenu>
+		
+		<h:outputText styleClass="elementsHeader" id="firstNameIn" value="First Name"></h:outputText>
+		<h:inputText styleClass="inputTextBox" id="firstName" value="#{signUpBean.firstName}" required="true" maxlength="30" size="35"></h:inputText>
+		<h:outputText styleClass="elementsHeader" id="lastNameIn" value="Last Name"></h:outputText>
+		<h:inputText styleClass="inputTextBox" id="lastName" value="#{signUpBean.lastName}" required="true" maxlength="30" size="35"></h:inputText>
 		
 		<h:outputText styleClass="elementsHeader" id="genderIn" value="Gender"></h:outputText>
-		<h:selectOneRadio id="gender" value="#{signUpBean.gender}" required="true" requiredMessage="Please choose the gender">
+		<h:selectOneRadio styleClass="elementsHeader" id="gender" value="#{signUpBean.gender}" required="true" requiredMessage="Please choose the gender">
 					<f:selectItem itemValue="M" itemLabel="Male" />
 					<f:selectItem itemValue="F" itemLabel="Female" />
 					<f:selectItem itemValue="O" itemLabel="Others" />
@@ -30,14 +40,25 @@
 		<h:outputText styleClass="elementsHeader" id="dobIn" value="Enter your date of birth (YYYY-MM-DD format)"></h:outputText>
 		<h:inputText styleClass="inputTextBox" id="dob" value="#{signUpBean.dob}" required="true" maxlength="30" size="35"></h:inputText>
 		
-		<h:outputText styleClass="elementsHeader" id="mobilePrimIn" value="Mobile number (Primary number)"></h:outputText>
-		<h:inputText styleClass="inputTextBox" id="mobilePrim" value="#{signUpBean.mobile}" required="true" maxlength="10" size="35"></h:inputText>
-		
-		<h:outputText styleClass="elementsHeader" id="mobileSecIn" value="Mobile number (Secondary number)"></h:outputText>
-		<h:inputText styleClass="inputTextBox" id="mobileSec" value="#{signUpBean.mobile}" required="true" maxlength="10" size="35"></h:inputText>
+		<h:outputText styleClass="elementsHeader" id="mobileIn" value="Mobile number"></h:outputText>
+		<h:inputText styleClass="inputTextBox" id="mobile" value="#{signUpBean.mobile}" required="true" maxlength="10" size="35"></h:inputText>
 				
 		<h:outputText styleClass="elementsHeader" id="emailIn" value="Email ID"></h:outputText>
 		<h:inputText styleClass="inputTextBox" id="email" value="#{signUpBean.email}" required="true" maxlength="30" size="35"></h:inputText>
+		
+		<h:outputText styleClass="elementsHeader" id="sAddrIn" value="Enter the shipping address"></h:outputText>
+		<h:inputTextarea styleClass="elementsHeader" id="sAddr" cols="40" rows="5" value="#{signUpBean.shippingAddress}" required="true"></h:inputTextarea>
+		
+		<h:outputText styleClass="elementsHeader" id="bAddrIn" value="Enter the billing address"></h:outputText>
+		<h:inputTextarea styleClass="elementsHeader" id="bAddr" cols="40" rows="5" value="#{signUpBean.billingAddress}" required="true"></h:inputTextarea>
+		
+		<h:selectBooleanCheckbox styleClass="rememberMe" value="same" id="sameAddrIn" />
+			<h:outputLabel styleClass="checkBoxDisplay" id="sameAddr" value="Both addresses are the same"></h:outputLabel>
+		
+		<h:outputText styleClass="elementsHeader" id="userIdIn" value="Choose an User ID"></h:outputText>
+		<h:inputText styleClass="inputTextBox" id="userId" value="#{signUpBean.userId}" required="true" maxlength="10" size="35"></h:inputText>
+		
+		<h:commandButton styleClass="submitBtn" id="checkAvailBtn" action="#{signUpBean.checkAvailability}" value="Check Availability"></h:commandButton>
 		
 		<h:outputText styleClass="elementsHeader" id="passwordIn" value="Choose your password"></h:outputText>
 		<h:inputSecret styleClass="inputTextBox" id="password" value="#{signUpBean.password}" required="true" maxlength="30" size="35"></h:inputSecret>

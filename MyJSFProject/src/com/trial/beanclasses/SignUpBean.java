@@ -3,7 +3,8 @@ package com.trial.beanclasses;
 import com.trial.controller.*;
 
 public class SignUpBean {
-	private String name;
+	private String firstName;
+	private String lastName;
 	private char gender;
 	private String dob;
 	private long mobile;
@@ -12,14 +13,22 @@ public class SignUpBean {
 	private String billingAddress;
 	private String shippingAddress;
 	private String userId;
-	private char customerType;
+	private char userType;
 	
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 	public char getGender() {
 		return gender;
 	}
@@ -51,36 +60,44 @@ public class SignUpBean {
 		this.password = password;
 	}
 	
-	public String getBillingAddress() {
-		return billingAddress;
-	}
-	public void setBillingAddress(String billingAddress) {
-		this.billingAddress = billingAddress;
-	}
 	public String getShippingAddress() {
 		return shippingAddress;
 	}
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
+	
+	public void setShippingAddress(String shipingAddress) {
+		this.shippingAddress = shipingAddress;
 	}
+	
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+	
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public char getCustomerType() {
-		return customerType;
+	public char getUserType() {
+		return userType;
 	}
-	public void setCustomerType(char customerType) {
-		this.customerType = customerType;
+	public void setUserType(char userType) {
+		this.userType = userType;
 	}
 	
 	public String createUser() {
 		String actionResult = "failure";
 		SignUpController signUp = new SignUpController();
 		try {
-			actionResult = signUp.addUser(name,gender,dob,email,mobile, mobile, billingAddress,shippingAddress,userId, password,customerType);
+			actionResult = signUp.addUser(userId, password,userType);
+			if(actionResult.equals("success"))
+				actionResult = signUp.addUserDetails(userId,firstName,lastName,gender,dob,email,mobile);
+			if(actionResult.equals("success"))
+				actionResult = signUp.addAddress(userId,shippingAddress, billingAddress);
 		}
 		catch (Exception e){
 			actionResult = "failure";
@@ -88,5 +105,9 @@ public class SignUpBean {
 		return actionResult;		
 	}
 	
+	public String checkAvailability() {
+		String result = "unavailable";
+		return result;
+	}
 	
 }

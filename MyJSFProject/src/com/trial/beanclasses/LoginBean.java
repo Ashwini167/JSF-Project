@@ -19,7 +19,7 @@ public class LoginBean {
 	}
 	
 	public String authorize() {
-		String actionResult;
+		String actionResult = "failure";
 		LoginController loginController = new LoginController();
 		try {
 		actionResult = loginController.authorizeUser(getUserID(),getPassword());

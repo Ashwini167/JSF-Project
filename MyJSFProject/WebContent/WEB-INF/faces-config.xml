@@ -29,4 +29,18 @@
 		<to-view-id>jsp/LoginFailure.jsp</to-view-id>		
 	</navigation-case>	
 	</navigation-rule>
+	<navigation-rule>
+	<from-view-id>jsp/SignUpPage.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>failure</from-outcome>
+		<to-view-id>jsp/LoginFailure.jsp</to-view-id>		
+	</navigation-case>	
+	</navigation-rule>
+	<navigation-rule>
+	<from-view-id>jsp/SignUpPage.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>jsp/Welcome.jsp</to-view-id>		
+	</navigation-case>	
+	</navigation-rule>
 </faces-config>
