@@ -5,10 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.trial.dto.AddressDTO;
+import com.trial.dto.UserDTO;
+import com.trial.dto.UserDetailsDTO;
+
 public class SignUpController {
-	public String addUser(String userId, String password, char userType) throws Exception {
-		String returnString = "failure";	
-		System.out.println("inside add user method" + userId);
+	public String addUser(UserDTO userDTO) throws Exception {
+		String returnString = "failure";
+		String userId = null;
+		String password = null;
+		char userType='C';	
+		
 		// JDBC driver name and database URL 
 		final String JDBC_DRIVER = "org.h2.Driver";   
 		final String DB_URL = "jdbc:h2:~/test";  
@@ -20,16 +27,21 @@ public class SignUpController {
 		Connection conn = null; 
 		Statement stmt = null; 
 		try {
-			Class.forName(JDBC_DRIVER);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			stmt = conn.createStatement();
-			String sql = "INSERT INTO USER VALUES ('"+userId+"','"+password+"','"+userType+"')";
-			stmt.executeUpdate(sql);
-			System.out.println("query executed");
-			stmt.close(); 
-			conn.close();
-			returnString = "success";
-			System.out.println("success assigned");
+			if(userDTO!=null) {
+				userId = userDTO.getUserId();
+				password = userDTO.getPassword();
+				userType = userDTO.getUserType();	
+				Class.forName(JDBC_DRIVER);
+				conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				stmt = conn.createStatement();
+				String sql = "INSERT INTO USER VALUES ('"+userId+"','"+password+"','"+userType+"')";
+				stmt.executeUpdate(sql);
+				System.out.println("query executed");
+				stmt.close(); 
+				conn.close();
+				returnString = "success";
+				System.out.println("success assigned");
+			}
 		}
 		catch (SQLException se) {
 			System.out.println("SQL exception");
@@ -59,8 +71,15 @@ public class SignUpController {
 	    return returnString;
 	}
 	
-	public String addUserDetails(String userId,String firstName,String lastName, char gender, String dob, String email, long mobile) throws Exception {
+	public String addUserDetails(UserDetailsDTO userDetailsDTO) throws Exception {
 		String returnString = "failure";	
+		String userId = null;
+		String firstName =null;
+		String lastName = null;
+		char gender = 'M';
+		String dob = null;
+		String email = null;
+		long mobile = 0;
 		System.out.println("inside add user method" + firstName);
 		// JDBC driver name and database URL 
 		final String JDBC_DRIVER = "org.h2.Driver";   
@@ -73,17 +92,27 @@ public class SignUpController {
 		Connection conn = null; 
 		Statement stmt = null; 
 		try {
-			Class.forName(JDBC_DRIVER);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			stmt = conn.createStatement();
-			String sql = "INSERT INTO USER_DETAILS VALUES ('"+userId+"','"+firstName+"','"+lastName+"','"+gender+"','"+dob+"','"+email+"','"+mobile+"')";
-			System.out.println("The query is: "+sql);
-			stmt.executeUpdate(sql);
-			System.out.println("query executed");
-			stmt.close(); 
-			conn.close();
-			returnString = "success";
-			System.out.println("success assigned");
+			if(userDetailsDTO!=null) {
+				userId = userDetailsDTO.getUserId();
+				firstName = userDetailsDTO.getFirstName();
+				lastName = userDetailsDTO.getLastName();
+				gender = userDetailsDTO.getGender();
+				dob = userDetailsDTO.getDob();
+				email = userDetailsDTO.getEmail();
+				mobile = userDetailsDTO.getMobile();
+				
+				Class.forName(JDBC_DRIVER);
+				conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				stmt = conn.createStatement();
+				String sql = "INSERT INTO USER_DETAILS VALUES ('"+userId+"','"+firstName+"','"+lastName+"','"+gender+"','"+dob+"','"+email+"','"+mobile+"')";
+				System.out.println("The query is: "+sql);
+				stmt.executeUpdate(sql);
+				System.out.println("query executed");
+				stmt.close(); 
+				conn.close();
+				returnString = "success";
+				System.out.println("success assigned");
+			}
 		}
 		catch (SQLException se) {
 			System.out.println("SQL exception");
@@ -113,8 +142,11 @@ public class SignUpController {
 	    return returnString;
 	}
 	
-	public String addAddress(String userId,String billingAddress, String shippingAddress) {
-		String returnString = "failure";	
+	public String addAddress(AddressDTO addressDTO) {
+		String returnString = "failure";
+		String userId = null; 
+		String billingAddress = null;
+		String shippingAddress = null;
 		System.out.println("inside add address method" + userId);
 		// JDBC driver name and database URL 
 		final String JDBC_DRIVER = "org.h2.Driver";   
@@ -127,20 +159,26 @@ public class SignUpController {
 		Connection conn = null; 
 		Statement stmt = null; 
 		try {
-			Class.forName(JDBC_DRIVER);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			stmt = conn.createStatement();
-			String sql1 = "INSERT INTO ADDRESS VALUES (default,'"+userId+"','"+shippingAddress+"','S')";
-			String sql2 = "INSERT INTO ADDRESS VALUES (default,'"+userId+"','"+billingAddress+"','B')";
-			System.out.println("The query is: "+sql1);
-			stmt.executeUpdate(sql1);
-			System.out.println("The query is: "+sql2);
-			stmt.executeUpdate(sql2);
-			System.out.println("Both queires executed");
-			stmt.close(); 
-			conn.close();
-			returnString = "success";
-			System.out.println("success assigned");
+			if(addressDTO!=null) {
+				userId = addressDTO.getUserId();
+				billingAddress = addressDTO.getBillingAddress();
+				shippingAddress = addressDTO.getShippingAddress();
+				
+				Class.forName(JDBC_DRIVER);
+				conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				stmt = conn.createStatement();
+				String sql1 = "INSERT INTO ADDRESS VALUES (default,'"+userId+"','"+shippingAddress+"','S')";
+				String sql2 = "INSERT INTO ADDRESS VALUES (default,'"+userId+"','"+billingAddress+"','B')";
+				System.out.println("The query is: "+sql1);
+				stmt.executeUpdate(sql1);
+				System.out.println("The query is: "+sql2);
+				stmt.executeUpdate(sql2);
+				System.out.println("Both queires executed");
+				stmt.close(); 
+				conn.close();
+				returnString = "success";
+				System.out.println("success assigned");
+			}
 		}
 		catch (SQLException se) {
 			System.out.println("SQL exception");

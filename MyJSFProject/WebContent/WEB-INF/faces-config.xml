@@ -15,6 +15,11 @@
 		<managed-bean-class>com.trial.beanclasses.SignUpBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>productBean</managed-bean-name>
+		<managed-bean-class>com.trial.beanclasses.ProductBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	<navigation-rule>
 	<from-view-id>jsp/LoginPage.jsp</from-view-id>
 	<navigation-case>
@@ -43,4 +48,21 @@
 		<to-view-id>jsp/Welcome.jsp</to-view-id>		
 	</navigation-case>	
 	</navigation-rule>
+	
+	<navigation-rule>
+	<from-view-id>jsp/AddProductPage.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>success</from-outcome>
+		<to-view-id>jsp/Welcome.jsp</to-view-id>		
+	</navigation-case>	
+	</navigation-rule>
+	
+	<navigation-rule>
+	<from-view-id>jsp/AddProductPage.jsp</from-view-id>
+	<navigation-case>
+		<from-outcome>failure</from-outcome>
+		<to-view-id>jsp/LoginFailure.jsp</to-view-id>		
+	</navigation-case>	
+	</navigation-rule>
+	
 </faces-config>

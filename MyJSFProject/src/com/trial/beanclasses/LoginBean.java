@@ -1,5 +1,6 @@
 package com.trial.beanclasses;
 import com.trial.controller.LoginController;
+import com.trial.dto.LoginDTO;
 
 public class LoginBean {
 	private String userID;
@@ -20,9 +21,12 @@ public class LoginBean {
 	
 	public String authorize() {
 		String actionResult = "failure";
+		LoginDTO loginDTO = new LoginDTO();
+		loginDTO.setUserID(getUserID());
+		loginDTO.setPassword(getPassword());
 		LoginController loginController = new LoginController();
 		try {
-		actionResult = loginController.authorizeUser(getUserID(),getPassword());
+		actionResult = loginController.authorizeUser(loginDTO);
 		}
 		catch (Exception e)
 		{

@@ -1,6 +1,9 @@
 package com.trial.beanclasses;
 
-import com.trial.controller.*;
+import com.trial.controller.SignUpController;
+import com.trial.dto.AddressDTO;
+import com.trial.dto.UserDTO;
+import com.trial.dto.UserDetailsDTO;
 
 public class SignUpBean {
 	private String firstName;
@@ -91,13 +94,33 @@ public class SignUpBean {
 	
 	public String createUser() {
 		String actionResult = "failure";
+		
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserId(getUserId());
+		userDTO.setPassword(getPassword());
+		userDTO.setUserType(getUserType());
+		
+		UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
+		userDetailsDTO.setUserId(getUserId());
+		userDetailsDTO.setFirstName(getFirstName());
+		userDetailsDTO.setLastName(getLastName());
+		userDetailsDTO.setGender(getGender());
+		userDetailsDTO.setDob(getDob());
+		userDetailsDTO.setEmail(getEmail());
+		userDetailsDTO.setMobile(getMobile());	
+		
+		AddressDTO addressDTO = new AddressDTO();
+		addressDTO.setUserId(getUserId());
+		addressDTO.setBillingAddress(getBillingAddress());
+		addressDTO.setShippingAddress(getShippingAddress());
+				
 		SignUpController signUp = new SignUpController();
 		try {
-			actionResult = signUp.addUser(userId, password,userType);
+			actionResult = signUp.addUser(userDTO);
 			if(actionResult.equals("success"))
-				actionResult = signUp.addUserDetails(userId,firstName,lastName,gender,dob,email,mobile);
+				actionResult = signUp.addUserDetails(userDetailsDTO);
 			if(actionResult.equals("success"))
-				actionResult = signUp.addAddress(userId,shippingAddress, billingAddress);
+				actionResult = signUp.addAddress(addressDTO);
 		}
 		catch (Exception e){
 			actionResult = "failure";

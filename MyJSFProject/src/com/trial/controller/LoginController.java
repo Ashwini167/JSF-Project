@@ -5,9 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.trial.dto.LoginDTO;
+
 public class LoginController {
-	public String authorizeUser(String userId, String password) throws Exception {
-		String returnString = "failure";	
+	public String authorizeUser(LoginDTO loginDTO) throws Exception {
+		String returnString = "failure";
+		String userId = null;
+		String password = null;
 		
 		// JDBC driver name and database URL 
 		final String JDBC_DRIVER = "org.h2.Driver";   
@@ -19,26 +23,30 @@ public class LoginController {
 		   
 		Connection conn = null; 
 		Statement stmt = null; 
+		
 		try {
-			Class.forName(JDBC_DRIVER);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			stmt = conn.createStatement();
-			String sql1 = "SELECT COUNT(*) FROM USER WHERE USER_ID='"+userId+"'";
-			System.out.println("The query is: "+sql1);
-			ResultSet rs1 = stmt.executeQuery(sql1);
-			while(rs1.next()) {
-				System.out.println("No of rows: "+rs1.getInt(1));
-				if(rs1.getInt(1)==1) {					
-					returnString = passwordCheck(userId, password);
+			if(loginDTO!=null) {
+				userId = loginDTO.getUserID();
+				password = loginDTO.getPassword();
+				Class.forName(JDBC_DRIVER);
+				conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				stmt = conn.createStatement();
+				String sql1 = "SELECT COUNT(*) FROM USER WHERE USER_ID='"+userId+"'";
+				System.out.println("The query is: "+sql1);
+				ResultSet rs1 = stmt.executeQuery(sql1);
+				while(rs1.next()) {
+					System.out.println("No of rows: "+rs1.getInt(1));
+					if(rs1.getInt(1)==1) {					
+						returnString = passwordCheck(userId, password);
+					}
+					else {
+						returnString = "failure";
+					}
 				}
-				else {
-					returnString = "failure";
-				}
-				
+				rs1.close();
+				stmt.close(); 
+				conn.close();
 			}
-			rs1.close();
-			stmt.close(); 
-			conn.close();
 		}
 		catch (SQLException se) {
 			se.printStackTrace(); 

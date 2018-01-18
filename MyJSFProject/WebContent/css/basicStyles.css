@@ -1,6 +1,7 @@
 @charset "ISO-8859-1";
 body {
-	background-color: ivory;
+	font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+	background-color: #ffdfb1;
 }
 
 .top-menu-container {
@@ -65,10 +66,10 @@ body {
     padding-top: 14px;
 }
 
-.rememberMe {
+.rememberMe {    
     display: block;
     float: left;
-    padding-top: 10px;
+    padding-top: 20px;
     font-size: 14px;
 }
 
@@ -78,7 +79,7 @@ body {
 
 .container {
    	margin: 0 auto;
-    font-family: "Arial",Sans-serif;
+    /*font-family: "Arial",Sans-serif;*/
     width: 300px;
     height: 300px;
     padding: 20px;
@@ -97,7 +98,8 @@ body {
 	font-style: italic;
     font-size: 14px;
     align: left;
-    padding: 10px;
+    padding: 10px 10px;
+    /*display: block;*/
 }
 
 .inputTextBox {
@@ -107,9 +109,74 @@ body {
 
 .signUpContainer {
 	margin: 0 auto;
-    font-family: "Arial",Sans-serif;
+   /* font-family: "Arial",Sans-serif;*/
     width: 350px;
     height: 1100px;
     padding: 20px;
     border: 2px solid #4CAF50;
 }
+
+.indivcheckbox .ui-chkbox-icon {
+    display:block;
+    background-position-x: -66px;
+    background-position-y: -147px;
+}
+
+.indivcheckbox .ui-icon-check {
+    width: 12px;
+    height: 12px;
+}
+
+.loginContainer {
+   	margin: 0 auto;
+   	/*font-family: "Arial",Sans-serif;*/
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+}
+
+
+.btn-success {
+	background-color: #4CAF50!important;
+}
+
+.productContainer {
+	margin: 0 auto;
+   /* font-family: "Arial",Sans-serif;*/
+    width: 350px;
+    height: 600px;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+}
+
+.displayTable {
+	font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+}
+
+.order-table{
+	border-collapse:collapse;
+	margin: 0 auto;
+}
+
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+
+.order-table-odd-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+
+.order-table-even-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border-top:1px solid #BBBBBB;
+}
+
+
+
